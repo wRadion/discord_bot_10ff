@@ -9,13 +9,13 @@ Sequel.migration do
       String      :tenff_name, null: false, size: 32
     end
 
-    create_table(:typetexts) do
+    create_table(:texts) do
       primary_key :id
       foreign_key :user_id, :users
       String      :content, text: true
     end
 
-    create_table(:typetext_scores) do
+    create_table(:text_scores) do
       primary_key :id
       foreign_key :text_id, :typetexts
       foreign_key :user_id, :users
@@ -45,8 +45,8 @@ Sequel.migration do
 
   down do
     drop_table(:users)
-    drop_table(:typetexts)
-    drop_table(:typetext_scores)
+    drop_table(:texts)
+    drop_table(:text_scores)
     drop_table(:competitions)
     drop_table(:quizzes)
   end
