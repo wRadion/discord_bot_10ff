@@ -9,8 +9,8 @@ gem 'discordrb'
 gem 'sequel'
 gem 'sqlite3'
 
-# Levenstein Distance
-gem 'text'
+# Autoloading
+gem 'awesome_loader'
 
 # Crawling / Scraping
 gem 'nokogiri'

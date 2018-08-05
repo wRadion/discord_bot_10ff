@@ -1,8 +1,8 @@
 # Database
 require_relative 'db/config'
 
-# Everything else
-require_relative 'includes'
+require_relative 'config/discord_bot'
+require_relative 'config/autoload'
 
 bot = Discordrb::Commands::CommandBot.new(DISCORD_CONFIG)
 ::Commands.register_in(bot)
