@@ -42,4 +42,4 @@ And voilà!
 
 # Maintainer
 
-wRadion <wradion@gmail.com>
+wRadion <<wradion@gmail.com>>
