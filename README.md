@@ -24,7 +24,12 @@ And you're done!
 
 ## How To Use
 
-Start the bot using the `main.rb` file:
+You will have to set the following environment variables before using this bot:
+- `DISCORD_OWNER_ID` _(optional)_ : The Discord Id of the owner of this bot
+- `DISCORD_TOKEN` _(mandatory)_ : The Token
+- `DISCORD_CLIENT_ID` _(mandatory)_ : The Client Id
+
+Then, start the bot using the `main.rb` file:
 
 ```
 $ ruby main.rb
