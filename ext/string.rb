@@ -21,4 +21,14 @@ class String
     self.gsub(/[\n\t]/, '').squeeze(' ').strip
   end
 
+  # Count the mistakes between two texts.
+  # e.g.:
+  #   'This is a text'.mistakes_count('This is a test')
+  #   #=> 1
+  def mistakes_count(other)
+    corrects = Diff::LCS.lcs(self, other)
+
+    (self.size - corrects.count) + (other - corrects).count
+  end
+
 end

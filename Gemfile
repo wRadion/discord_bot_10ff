@@ -9,6 +9,9 @@ gem 'discordrb'
 gem 'sequel'
 gem 'sqlite3'
 
+# Text processing
+gem 'diff-lcs'
+
 # Autoloading
 gem 'require_all'
 gem 'awesome_loader'
