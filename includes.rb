@@ -1,12 +1,5 @@
-# Core
-require 'bundler'
-require 'json'
-
 # Gems
-Bundler.require(:default)
-
-# Database
-require_relative 'db/config.rb'
+require_relative 'gems'
 
 # Config
 require_relative 'config/discord_bot.rb'
@@ -18,8 +11,8 @@ require_relative 'ext/string'
 
 # Models
 require_relative 'models/user'
-require_relative 'models/text'
-require_relative 'models/text_score'
+require_relative 'models/typetext'
+require_relative 'models/typetext_score'
 require_relative 'models/competition'
 require_relative 'models/quiz'
 

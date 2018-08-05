@@ -1,0 +1,3 @@
+#!/bin/sh
+
+sequel -r "./includes.rb" "sqlite://db/sqlite.db"

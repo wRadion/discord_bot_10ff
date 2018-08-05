@@ -1,3 +1,3 @@
 # Database initialization
 
-DB = Sequel.sqlite('data/sqlite.db')
+DB = Sequel.sqlite('db/sqlite.db')

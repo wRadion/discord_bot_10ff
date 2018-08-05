@@ -1,5 +1,3 @@
-require_relative '../../includes'
-
 Sequel.migration do
 
   up do
@@ -11,15 +9,15 @@ Sequel.migration do
       String      :tenff_name, null: false, size: 32
     end
 
-    create_table(:texts) do
+    create_table(:typetexts) do
       primary_key :id
       foreign_key :user_id, :users
       String      :content, text: true
     end
 
-    create_table(:text_scores) do
+    create_table(:typetext_scores) do
       primary_key :id
-      foreign_key :text_id, :texts
+      foreign_key :text_id, :typetexts
       foreign_key :user_id, :users
       smallint    :wpm,     null: false, size: 4
     end
@@ -47,8 +45,8 @@ Sequel.migration do
 
   down do
     drop_table(:users)
-    drop_table(:texts)
-    drop_table(:text_scores)
+    drop_table(:typetexts)
+    drop_table(:typetext_scores)
     drop_table(:competitions)
     drop_table(:quizzes)
   end
