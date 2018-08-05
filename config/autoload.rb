@@ -5,9 +5,12 @@ require 'json'
 # Gems
 Bundler.require(:default)
 
+# Require extensions
+require_all 'ext/'
+
+# Autoload everything else
 DIRS = %w(
   commands
-  ext
   lib
   models
 )

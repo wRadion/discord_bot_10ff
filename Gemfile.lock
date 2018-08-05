@@ -38,6 +38,7 @@ GEM
       pry (~> 0.10)
     rbnacl (3.4.0)
       ffi
+    require_all (2.0.0)
     rest-client (2.0.2)
       http-cookie (>= 1.0.2, < 2.0)
       mime-types (>= 1.16, < 4.0)
@@ -66,6 +67,7 @@ DEPENDENCIES
   discordrb
   nokogiri
   pry-byebug
+  require_all
   selenium-webdriver
   sequel
   sqlite3

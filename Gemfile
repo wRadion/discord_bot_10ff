@@ -10,6 +10,7 @@ gem 'sequel'
 gem 'sqlite3'
 
 # Autoloading
+gem 'require_all'
 gem 'awesome_loader'
 
 # Crawling / Scraping
