@@ -42,7 +42,7 @@ And voilà!
 This project uses *sqlite* as a database, and the *Sequel* gem as the Ruby API.
 
 Create your migration in `db/migrate/`.
-(Here is some help)[https://github.com/jeremyevans/sequel/blob/master/doc/migration.rdoc] if you don't know how to write a Sequel migration.
+[Here is some help](https://github.com/jeremyevans/sequel/blob/master/doc/migration.rdoc) if you don't know how to write a Sequel migration.
 
 The file **must** be following this format: `XXX_<name>.rb`.
 When `XXX` is a 3 digits numbers, and must be the one following the last number present in the folder.
