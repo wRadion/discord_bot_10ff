@@ -1,3 +1,5 @@
+require_relative 'base'
+
 module Commands
   module Type
     class Add < Base
@@ -7,7 +9,7 @@ module Commands
       end
 
       def usage
-        '<text>'
+        '`?type add <texte>`'
       end
 
       def execute(event, *args)

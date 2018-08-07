@@ -9,12 +9,8 @@ gem 'discordrb'
 gem 'sequel'
 gem 'sqlite3'
 
-# Text processing
+# Text Processing
 gem 'diff-lcs'
-
-# Autoloading
-gem 'require_all'
-gem 'awesome_loader'
 
 # Crawling / Scraping
 gem 'nokogiri'

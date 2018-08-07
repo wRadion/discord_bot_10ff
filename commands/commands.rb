@@ -1,3 +1,5 @@
+require_relative './type'
+
 module Commands
 
   def self.register_in(bot)
