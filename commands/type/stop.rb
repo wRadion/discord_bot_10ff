@@ -15,7 +15,33 @@ module Commands
       end
 
       def execute(event)
-        'Stop!'
+        if $typerace.launched?
+          $typerace.reset!
+
+          Embed::Success.send(
+            event.channel,
+            [
+              {
+                name: ':stop_sign:  Course arrêtée',
+                value: 'La course a été abandonnée.'
+              }
+            ]
+          )
+        elsif !$typerace.started?
+          Embed::Error.send(event.channel, "Il n'y a aucune course en cours.")
+        else
+          $typerace.stop
+
+          Embed::Success.send(
+            event.channel,
+            [
+              {
+                name: ':stop_sign:  Course arrêtée',
+                value: 'La course a été arrêtée.'
+              }
+            ]
+          )
+        end
       end
 
     end

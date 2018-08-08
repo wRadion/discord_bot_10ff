@@ -21,10 +21,23 @@ module Commands
         end
         page = page.to_i
 
-        limit = 25
+        limit = PAGINATION_LIMIT
         offset = (page - 1) * limit
 
         total_pages = (::User.count / limit.to_f).ceil
+
+        if total_pages.zero?
+          Embed::Success.send(
+            event.channel,
+            [
+              {
+                name: ':ledger:  Liste des utilisateurs',
+                value: 'Aucun utilisateur dans la base.'
+              }
+            ]
+          )
+          return
+        end
 
         if page.negative? || page > total_pages
           Embed::Error.send(event.channel, "Cette page n'existe pas.")

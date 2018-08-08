@@ -1,5 +1,7 @@
 require 'discordrb'
 
+require_relative '../lib/type_race'
+
 require_relative 'type/add'
 require_relative 'type/del'
 require_relative 'type/help'
@@ -11,6 +13,7 @@ require_relative 'type/join'
 
 module Commands
   module Type
+    extend Discordrb::EventContainer
     extend Discordrb::Commands::CommandContainer
 
     # -- type --
@@ -42,6 +45,38 @@ module Commands
 
     command(:join, description: JOIN_DESCRIPTION, usage: JOIN_USAGE) do |event, *args|
       Commands.execute(Commands::Type::Join, event, *args)
+    end
+
+    # -- pm   --
+
+    private_message do |event|
+      if !event.text.start_with?('?') && $typerace.started? && $typerace.in_race?(event.user)
+        $typerace.finish(event.user, event.text)
+
+        if $typerace.everyone_finished?
+          Embed::Success.send(
+            event.channel,
+            [
+              {
+                name: ':clap:  Bravo !',
+                value: "Les résultats ont été envoyés dans le channel ##{$typerace.channel.name}."
+              }
+            ]
+          )
+
+          $typerace.stop
+        else
+          Embed::Success.send(
+            event.channel,
+            [
+              {
+                name: ':clap:  Bravo !',
+                value: 'Les résultats de la course vont être envoyés lorsque tout le monde aura fini ou si vous arrêtez la course en tapant `?type stop`.'
+              }
+            ]
+          )
+        end
+      end
     end
 
     # ---------

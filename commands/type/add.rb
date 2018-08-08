@@ -15,10 +15,10 @@ module Commands
       end
 
       def execute(event, *args)
-        user = User.find_or_error(event)
+        user = ::User.find_or_error(event)
         text = args.join(' ')
 
-        Text.create(
+        ::Text.create(
           user_id: user[:id],
           content: text
         )
@@ -28,7 +28,7 @@ module Commands
           [
             { name: ':white_check_mark:  Texte ajouté !', value: text }
           ],
-          { footer: EmbedFooter.new(text: user.name) }
+          { footer: { text: user.name } }
         )
       end
 

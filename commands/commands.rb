@@ -5,6 +5,8 @@ require_relative './user'
 
 module Commands
 
+  PAGINATION_LIMIT = 15
+
   def self.execute(command, event, *args)
     cmd = command.new
 
