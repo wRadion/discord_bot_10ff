@@ -1,15 +1,13 @@
-require_relative 'base'
-
 module Commands
   module Type
-    class Start < Base
+    class Start
 
       def description
         'Démarre une course de dactylographie.'
       end
 
       def usage
-        '`?type start`'
+        '?type start'
       end
 
       def argc

@@ -1,15 +1,13 @@
-require_relative 'base'
-
 module Commands
   module Type
-    class List < Base
+    class List
 
       def description
         'Liste tous les textes présents dans la base des textes'
       end
 
       def usage
-        '`?type list [page=1]`'
+        '?type list [page=1]'
       end
 
       def argc

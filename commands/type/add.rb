@@ -1,15 +1,17 @@
-require_relative 'base'
-
 module Commands
   module Type
-    class Add < Base
+    class Add
 
       def description
         'Ajoute un texte dans la base des textes.'
       end
 
       def usage
-        '`?type add <texte>`'
+        '?type add <texte>'
+      end
+
+      def argc
+        nil
       end
 
       def execute(event, *args)
@@ -17,7 +19,7 @@ module Commands
         text = args.join(' ')
 
         Text.create(
-          user_id: User.where(user_id: user.id).id,
+          user_id: user[:id],
           content: text
         )
 

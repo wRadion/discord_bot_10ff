@@ -1,15 +1,13 @@
-require_relative 'base'
-
 module Commands
   module Type
-    class Del < Base
+    class Del
 
       def description
         'Supprime un texte de la base des textes.'
       end
 
       def usage
-        '`?type del <id texte>`'
+        '?type del <id texte>'
       end
 
       def argc

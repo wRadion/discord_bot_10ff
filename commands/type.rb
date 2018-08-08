@@ -23,13 +23,7 @@ module Commands
       command_class = "Commands::Type::#{subcmd&.capitalize}"
 
       if Object.const_defined?(command_class)
-        cmd = Object.const_get(command_class).new
-
-        if cmd.argc.nil? || cmd.argc.include?(args.count)
-          cmd.execute(event, *args)
-        else
-          Embed::Error.send(event.channel, "Mauvais nombre d'arguments.", cmd.usage)
-        end
+        Commands.execute(Object.const_get(command_class), event, *args)
       else
         Embed::Error.send(event.channel, "Command `#{subcmd}` inconnue.", "`#{TYPE_USAGE}`")
       end
@@ -40,8 +34,8 @@ module Commands
     JOIN_DESCRIPTION = 'Join a pending typing race.'.freeze
     JOIN_USAGE = '?join'.freeze
 
-    command(:join, description: JOIN_DESCRIPTION, usage: JOIN_USAGE) do |event|
-      Commands::Type::Join.new.execute(event)
+    command(:join, description: JOIN_DESCRIPTION, usage: JOIN_USAGE) do |event, *args|
+      Commands.execute(Commands::Type::Join, event, *args)
     end
 
     # ---------

@@ -1,13 +1,13 @@
 module Commands
   module Type
-    class Help < Base
+    class Help
 
       def description
         "Donne des informations sur une commande `?type help add|del|list|start|stop`."
       end
 
       def usage
-        '`?type help <add|del|help|list|start|stop>`'
+        '?type help <add|del|help|list|start|stop>'
       end
 
       def argc
