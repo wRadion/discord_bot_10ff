@@ -6,7 +6,11 @@ module Embed
         embed.color = '#00AA00'
         fields.each { |f| embed.add_field(f) }
 
-        params.each { |p, v| send("#{p}=", v) }
+        if params[:footer]
+          embed.footer = Discordrb::Webhooks::EmbedFooter.new(params.delete(:footer))
+        end
+
+        params.each { |p, v| embed.send("#{p}=", v) }
       end
     end
 

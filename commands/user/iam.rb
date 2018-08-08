@@ -5,7 +5,7 @@ module Commands
     class Iam
 
       def description
-        Commands::User::IAM_DESCRIPTION
+        "Permet de s'enregistrer dans la base."
       end
 
       def usage
@@ -20,6 +20,19 @@ module Commands
         if !(tenff_id =~ /\d+/)
           Embed::Error.send(
             event.channel, "Votre id 10FastFingers doit être un nombre entier.", usage
+          )
+          return
+        end
+
+        if ::User.where(tenff_id: tenff_id).first
+          Embed::Success.send(
+            event.channel,
+            [
+              {
+                name: ':ok_hand: Rien à faire !',
+                value: 'Vous êtes déjà enregistré dans la base.'
+              }
+            ]
           )
           return
         end
@@ -40,7 +53,7 @@ module Commands
           [
             {
               name: ':white_check_mark:  Utilisateur ajouté !',
-              value: "L'utilisateur `#{user[:name]}` a été créé avec succes."
+              value: "L'utilisateur `#{user[:name]}` a été créé avec succès."
             }
           ]
         )

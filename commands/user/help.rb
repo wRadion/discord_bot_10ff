@@ -1,13 +1,13 @@
 module Commands
-  module Type
+  module User
     class Help
 
       def description
-        "Donne des informations sur une commande `?type help add|del|list|start|join|stop`."
+        "Donne des informations sur une commande `?type help iam|del|list`."
       end
 
       def usage
-        '?type help <add|del|help|list|start|join|stop>'
+        '?user help <iam|del|list>'
       end
 
       def argc
@@ -15,7 +15,7 @@ module Commands
       end
 
       def execute(event, command)
-        command_class = "Commands::Type::#{command&.capitalize}"
+        command_class = "Commands::User::#{command&.capitalize}"
 
         if Object.const_defined?(command_class)
           cmd = Object.const_get(command_class).new

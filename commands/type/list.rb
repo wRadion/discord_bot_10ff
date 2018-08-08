@@ -14,7 +14,7 @@ module Commands
         [0, 1]
       end
 
-      def execute(event, page = 0)
+      def execute(event, page = '1')
         "List! #{page}"
       end
 

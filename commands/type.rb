@@ -20,6 +20,12 @@ module Commands
 
     command(:type, description: TYPE_DESCRIPTION, usage: TYPE_USAGE) do |event, *args|
       subcmd = args.delete_at(0)
+
+      if subcmd.nil? || subcmd.empty?
+        Embed::Error.send(event.channel, nil, "`#{TYPE_USAGE}`")
+        return
+      end
+
       command_class = "Commands::Type::#{subcmd&.capitalize}"
 
       if Object.const_defined?(command_class)

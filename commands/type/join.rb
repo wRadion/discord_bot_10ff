@@ -7,7 +7,7 @@ module Commands
       end
 
       def usage
-        '?join'
+        Commands::Type::JOIN_USAGE
       end
 
       def argc
