@@ -6,6 +6,7 @@ require_relative 'type/add'
 require_relative 'type/del'
 require_relative 'type/help'
 require_relative 'type/list'
+require_relative 'type/records'
 require_relative 'type/start'
 require_relative 'type/stop'
 
@@ -19,9 +20,11 @@ module Commands
     # -- type --
 
     TYPE_DESCRIPTION = 'Commands for managing typing race.'.freeze
-    TYPE_USAGE = '?type add|del|help|list|start|stop'.freeze
+    TYPE_USAGE = '?type add|del|help|list|records|start|stop'.freeze
 
     command(:type, description: TYPE_DESCRIPTION, usage: TYPE_USAGE) do |event, *args|
+      return unless ::User.find_or_error(event)
+
       subcmd = args.delete_at(0)
 
       if subcmd.nil? || subcmd.empty?
@@ -44,6 +47,8 @@ module Commands
     JOIN_USAGE = '?join'.freeze
 
     command(:join, description: JOIN_DESCRIPTION, usage: JOIN_USAGE) do |event, *args|
+      return unless ::User.find_or_error(event)
+
       Commands.execute(Commands::Type::Join, event, *args)
     end
 

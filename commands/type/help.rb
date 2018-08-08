@@ -3,11 +3,11 @@ module Commands
     class Help
 
       def description
-        "Donne des informations sur une commande `?type help add|del|list|start|join|stop`."
+        "Donne des informations sur une commande `?type help add|del|list|records|start|join|stop`."
       end
 
       def usage
-        '?type help <add|del|help|list|start|join|stop>'
+        '?type help <add|del|help|list|records|start|join|stop>'
       end
 
       def argc

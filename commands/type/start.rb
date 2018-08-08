@@ -1,3 +1,5 @@
+require_relative '../../models/text'
+
 module Commands
   module Type
     class Start
@@ -7,15 +9,18 @@ module Commands
       end
 
       def usage
-        '?type start'
+        '?type start [text id]'
       end
 
       def argc
-        [0]
+        [0, 1]
       end
 
-      def execute(event)
-        user = event.user
+      def execute(event, text_id = nil)
+        if !text_id.nil? && !(text_id =~ /\d+/)
+          Embed::Error.send(event.channel, "L'id du texte doit être un nombre entier.")
+          return
+        end
 
         if ::Text.count.zero?
           Embed::Error.send(
@@ -24,6 +29,15 @@ module Commands
           )
           return
         end
+
+        text = text_id.nil? ? ::Text.all.sample : ::Text[text_id]
+
+        if text.nil?
+          Embed::Error.send(event.channel, "Aucun texte trouvé avec pour id `#{text_id}`.")
+          return
+        end
+
+        user = event.user
 
         if $typerace.started?
           Embed::Error.send(event.channel, 'Une course est actuellement en cours.')
@@ -43,7 +57,7 @@ module Commands
             ]
           )
         else
-          $typerace.launch(event.channel)
+          $typerace.launch(event.channel, text)
           $typerace.join(user)
 
           Embed::Success.send(

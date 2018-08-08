@@ -17,7 +17,7 @@ Sequel.migration do
 
     create_table(:text_scores) do
       primary_key :id
-      foreign_key :text_id, :typetexts
+      foreign_key :text_id, :texts
       foreign_key :user_id, :users
       smallint    :wpm,     null: false, size: 4
     end
@@ -33,7 +33,7 @@ Sequel.migration do
 
     create_table(:quizzes) do
       primary_key :id
-      foreign_key :user_id
+      foreign_key :user_id, :users
       String      :question,  null: false
       tinyint     :answer_id, null: false, size: 1
       String      :answer_1

@@ -1,8 +1,8 @@
+require 'date'
 require 'singleton'
 require 'diff/lcs'
 
 require_relative '../models/user'
-require_relative '../models/text'
 
 require_relative 'embed'
 
@@ -15,14 +15,14 @@ class TypeRace
     reset!
   end
 
-  def launch(channel)
+  def launch(channel, text)
     @status = :launched
     @channel = channel
+    @text = text
   end
 
   def start!
     @status = :started
-    @text = Text.all.sample
 
     each_participants { |user| Embed::Basic.send(user, @text[:content]) }
 
@@ -45,6 +45,13 @@ class TypeRace
     time = (Time.now - @start).round(2)
     wpm, errors, accuracy = compute_wpm(@text[:content], typed, time)
 
+    ::TextScore.create(
+      text_id: @text[:id],
+      user_id: ::User.where(discord_id: user.id).first[:id],
+      wpm: wpm,
+      date: DateTime.now
+    )
+
     @users[user.id].merge!(
       time: time,
       wpm: wpm,
@@ -64,10 +71,10 @@ class TypeRace
   def results
     @users.values.sort { |a, b| b[:wpm].to_i <=> a[:wpm].to_i }.map.with_index do |user, rank|
       "**#{rank + 1}.** #{user[:name]}" +
-        " (**#{user[:wpm]} MPM**)" +
-        " [*#{user[:time]} sec," +
-          " #{user[:errors]} faute#{user[:errors].positive? ? 's' : ''}*," +
-          " **#{user[:accuracy]}%** de précision]"
+        " (**#{user[:wpm] || 'N/A'} MPM**)" +
+        " [*#{user[:time] || 'N/A'} sec," +
+          " #{user[:errors] || 'N/A'} faute#{(user[:errors] || 0) > 1 ? 's' : ''}*," +
+          " **#{user[:accuracy] || 'N/A'}%** de précision]"
     end
   end
 
@@ -95,17 +102,19 @@ class TypeRace
 
   def compute_wpm(text, typed, time)
     corrects = Diff::LCS.lcs(text, typed)
-    errors = (typed.size - corrects.count) + (typed.chars - corrects).count
+    errors = (text.size - corrects.count) + (typed.chars - corrects).count
     strokes = strokes(corrects.join)
 
     [
       (((60 / time) * strokes) / 5).round,
      errors,
-     ((corrects.count / text.size.to_f) * 100).round(2)
+     (((text.size - errors) / text.size.to_f) * 100).round(2)
     ]
   end
 
   def strokes(text)
+    return 0 if text.nil?
+
     text.chars.map do |c|
       case c
       when /[ÂÊÎÔÛÄËÏÖÜŸ]/ then 3

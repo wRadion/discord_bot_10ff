@@ -25,6 +25,8 @@ module Commands
     USER_USAGE = '?user del|help|list'.freeze
 
     command(:user, description: USER_DESCRIPTION, usage: USER_USAGE) do |event, *args|
+      return unless ::User.find_or_error(event)
+
       subcmd = args.delete_at(0)
 
       if subcmd.nil? || subcmd.empty?

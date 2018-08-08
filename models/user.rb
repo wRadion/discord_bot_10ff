@@ -13,6 +13,7 @@ class User < Sequel::Model
         "Vous ne pouvez pas utiliser cette commande car vous n'avez pas associé votre compte 10FastFingers.",
         "`?iam <votre id 10ff>`"
       )
+      nil
     else
       user
     end
