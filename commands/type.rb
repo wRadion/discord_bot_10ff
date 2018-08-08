@@ -19,7 +19,8 @@ module Commands
     TYPE_USAGE = '?type add|del|help|list|start|stop'.freeze
 
     command(:type, description: TYPE_DESCRIPTION, usage: TYPE_USAGE) do |event, *args|
-      command_class = "Commands::Type::#{args.delete_at(0)&.capitalize}"
+      subcmd = args.delete_at(0)
+      command_class = "Commands::Type::#{subcmd&.capitalize}"
 
       if Object.const_defined?(command_class)
         cmd = Object.const_get(command_class).new
@@ -27,10 +28,10 @@ module Commands
         if cmd.argc.nil? || cmd.argc.include?(args.count)
           cmd.execute(event, *args)
         else
-          "Wrong number of arguments.\n**Usage:** #{cmd.usage}"
+          Embed::Error.send(event.channel, "Mauvais nombre d'arguments.", cmd.usage)
         end
       else
-        "**Usage:** `#{TYPE_USAGE}`"
+        Embed::Error.send(event.channel, "Command `#{subcmd}` inconnue.", "`#{TYPE_USAGE}`")
       end
     end
 

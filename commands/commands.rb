@@ -1,3 +1,5 @@
+require_relative '../lib/embed'
+
 require_relative './type'
 
 module Commands

@@ -20,9 +20,15 @@ module Commands
         if Object.const_defined?(command_class)
           cmd = Object.const_get(command_class).new
 
-          "**Description:** #{cmd.description}\n**Usage:** #{cmd.usage}"
+          Embed::Success.send(
+            event.channel,
+            [
+              { name: ':speech_balloon:  Description', value: cmd.description },
+              { name: 'Utilisation', value: cmd.usage }
+            ]
+          )
         else
-          usage
+          Embed::Error.send(event.channel, "Commande `#{command}` inconnue.", usage)
         end
       end
 

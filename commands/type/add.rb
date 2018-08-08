@@ -13,12 +13,20 @@ module Commands
       end
 
       def execute(event, *args)
-        user = find_user(event)
+        user = User.find_or_error(event)
         text = args.join(' ')
 
         Text.create(
           user_id: User.where(user_id: user.id).id,
           content: text
+        )
+
+        Embed::Success.send(
+          event.channel,
+          [
+            { name: ':white_check_mark:  Texte ajouté !', value: text }
+          ],
+          { footer: EmbedFooter.new(text: user.name) }
         )
       end
 
