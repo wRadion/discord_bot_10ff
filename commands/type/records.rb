@@ -22,7 +22,7 @@ module Commands
         user = (user_id.nil? || user_id == '0') ? ::User.find_or_error(event) : ::User[user_id.to_i]
 
         if user.nil?
-          Embed::Error.send(event.channel, "Aucun utilisateur trouvé avec pour id `#{text_id}`.")
+          Embed::Error.send(event.channel, "Aucun utilisateur trouvé avec pour id `#{user_id}`.")
           return
         end
 
