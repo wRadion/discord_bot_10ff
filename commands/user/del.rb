@@ -39,7 +39,7 @@ module Commands
           [
             {
               name: ':boom:  Utilisateur supprimé',
-              value: "L'utilisateur `#{user[:name]}` a été supprimé avec succès. Cela a également eut pour effet de supprimer les textes, les quizs et les records de l'utilisateur."
+              value: "L'utilisateur `#{user[:name]}` a été supprimé avec succès. Cela a également eu pour effet de supprimer les textes, les quiz et les records de l'utilisateur."
             }
           ]
         )
