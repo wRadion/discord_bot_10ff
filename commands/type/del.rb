@@ -28,6 +28,8 @@ module Commands
           return
         end
 
+        ::TextScore.where(text_id: text[:id]).delete
+
         text.delete
 
         Embed::Success.send(

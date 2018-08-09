@@ -28,6 +28,10 @@ module Commands
           return
         end
 
+        ::Text.where(user_id: user[:id]).delete
+        ::TextScore.where(user_id: user[:id]).delete
+        ::Quiz.where(user_id: user[:id]).delete
+
         user.delete
 
         Embed::Success.send(
@@ -35,12 +39,11 @@ module Commands
           [
             {
               name: ':boom:  Utilisateur supprimé',
-              value: "L'utilisateur `#{user[:name]}` a été supprimé avec succès."
+              value: "L'utilisateur `#{user[:name]}` a été supprimé avec succès. Cela a également eut pour effet de supprimer les textes, les quizs et les records de l'utilisateur."
             }
           ]
         )
       end
-
 
     end
   end
