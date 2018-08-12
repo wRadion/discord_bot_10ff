@@ -13,8 +13,9 @@ module Browser
       end
 
       def main_language
+        sleep(1)
         Tenff.id_lang(
-          @html.css('#graph-flag-selection > a').first.attribute('speedtest_id').value
+          fetch_html.css('#graph-flag-selection > a').first.attribute('speedtest_id').value
         )
       end
 
@@ -27,7 +28,7 @@ module Browser
 
         button.click!
 
-        sleep 1
+        sleep(1)
       end
 
       def scores(type)
