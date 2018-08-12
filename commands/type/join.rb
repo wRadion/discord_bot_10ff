@@ -17,14 +17,14 @@ module Commands
       def execute(event)
         user = event.user
 
-        if $typerace.started?
+        if $typingrace.started?
           Embed::Error.send(event.channel, 'Une course est actuellement en cours.')
-        elsif !$typerace.launched?
+        elsif !$typingrace.launched?
           Embed::Error.send(event.channel, "Il n'y a aucune course en cours.")
-        elsif $typerace.in_race?(user)
+        elsif $typingrace.in_race?(user)
           Embed::Error.send(event.channel, 'Vous êtes déjà dans la course.')
         else
-          $typerace.join(user)
+          $typingrace.join(user)
 
           Embed::Success.send(
             event.channel,

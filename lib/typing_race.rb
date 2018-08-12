@@ -6,7 +6,7 @@ require_relative '../models/user'
 
 require_relative 'embed'
 
-class TypeRace
+class TypingRace
   include Singleton
 
   attr_accessor :text, :channel
@@ -131,4 +131,4 @@ class TypeRace
 
 end
 
-$typerace = TypeRace.instance
+$typingrace = TypingRace.instance

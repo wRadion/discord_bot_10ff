@@ -15,8 +15,8 @@ module Commands
       end
 
       def execute(event)
-        if $typerace.launched?
-          $typerace.reset!
+        if $typingrace.launched?
+          $typingrace.reset!
 
           Embed::Success.send(
             event.channel,
@@ -27,10 +27,10 @@ module Commands
               }
             ]
           )
-        elsif !$typerace.started?
+        elsif !$typingrace.started?
           Embed::Error.send(event.channel, "Il n'y a aucune course en cours.")
         else
-          $typerace.stop
+          $typingrace.stop
 
           Embed::Success.send(
             event.channel,

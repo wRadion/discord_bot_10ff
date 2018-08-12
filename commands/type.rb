@@ -1,6 +1,6 @@
 require 'discordrb'
 
-require_relative '../lib/type_race'
+require_relative '../lib/typing_race'
 
 require_relative 'type/add'
 require_relative 'type/del'
@@ -55,21 +55,21 @@ module Commands
     # -- pm   --
 
     private_message do |event|
-      if !event.text.start_with?('?') && $typerace.started? && $typerace.in_race?(event.user)
-        $typerace.finish(event)
+      if !event.text.start_with?('?') && $typingrace.started? && $typingrace.in_race?(event.user)
+        $typingrace.finish(event)
 
-        if $typerace.everyone_finished?
+        if $typingrace.everyone_finished?
           Embed::Success.send(
             event.channel,
             [
               {
                 name: ':clap:  Bravo !',
-                value: "Les résultats ont été envoyés dans le channel ##{$typerace.channel.name}."
+                value: "Les résultats ont été envoyés dans le channel ##{$typingrace.channel.name}."
               }
             ]
           )
 
-          $typerace.stop
+          $typingrace.stop
         else
           Embed::Success.send(
             event.channel,

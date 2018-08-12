@@ -39,31 +39,31 @@ module Commands
 
         user = event.user
 
-        if $typerace.started?
+        if $typingrace.started?
           Embed::Error.send(event.channel, 'Une course est actuellement en cours.')
           return
         end
 
-        if $typerace.launched?
+        if $typingrace.launched?
           3.downto(1) do |i|
-            $typerace.each_participants { |user| user.send("#{i}...") }
+            $typingrace.each_participants { |user| user.send("#{i}...") }
             sleep(1)
           end
 
-          $typerace.start!
+          $typingrace.start!
 
           Embed::Success.send(
-            $typerace.channel,
+            $typingrace.channel,
             [
               {
                 name: ':checkered_flag:  La course a été lancée avec le texte suivant:',
-                value: $typerace.text[:content]
+                value: $typingrace.text[:content]
               }
             ]
           )
         else
-          $typerace.launch(event.channel, text)
-          $typerace.join(user)
+          $typingrace.launch(event.channel, text)
+          $typingrace.join(user)
 
           Embed::Success.send(
             event.channel,
