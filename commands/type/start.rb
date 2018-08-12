@@ -45,6 +45,11 @@ module Commands
         end
 
         if $typerace.launched?
+          3.downto(1) do |i|
+            $typerace.each_participants { |user| user.send("#{i}...") }
+            sleep(1)
+          end
+
           $typerace.start!
 
           Embed::Success.send(

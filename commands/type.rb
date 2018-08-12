@@ -56,7 +56,7 @@ module Commands
 
     private_message do |event|
       if !event.text.start_with?('?') && $typerace.started? && $typerace.in_race?(event.user)
-        $typerace.finish(event.user, event.text)
+        $typerace.finish(event)
 
         if $typerace.everyone_finished?
           Embed::Success.send(

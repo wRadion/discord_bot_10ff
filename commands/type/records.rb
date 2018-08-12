@@ -40,7 +40,7 @@ module Commands
         scores = ::TextScore.where(user_id: user[:id], text_id: texts.map { |t| t[:id] })
 
         records = scores.order(Sequel.desc(:wpm)).limit(10).map do |score|
-          "__Text:__ #{score[:text_id]} | **#{score[:wpm]} MPM** | #{score[:date].strftime("%D")}"
+          "__Text:__ #{score[:text_id]} | **#{score[:wpm]} MPM** | #{score[:date].strftime("%d/%m/%Y")}"
         end
 
         Embed::Success.send(

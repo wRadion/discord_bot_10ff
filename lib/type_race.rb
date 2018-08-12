@@ -41,8 +41,11 @@ class TypeRace
     }
   end
 
-  def finish(user, typed)
-    time = (Time.now - @start).round(2)
+  def finish(event)
+    user = event.user
+    typed = event.text
+
+    time = (event.timestamp - @start).round(2)
     wpm, errors, accuracy = compute_wpm(@text[:content], typed, time)
 
     ::TextScore.create(
