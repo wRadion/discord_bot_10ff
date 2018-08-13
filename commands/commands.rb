@@ -2,6 +2,7 @@ require_relative '../lib/embed'
 
 require_relative './type'
 require_relative './user'
+require_relative './ping'
 
 module Commands
 
@@ -28,6 +29,9 @@ module Commands
     # ?iam
     # ?user
     bot.include!(User)
+
+    # ?ping
+    bot.include!(Ping)
   end
 
 end
